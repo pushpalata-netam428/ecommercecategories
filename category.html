@@ -1,0 +1,51 @@
+<html>
+<body>
+<script src="categoryz.js" type="text/javascript"></script>
+
+<table width="100%">
+	<tr>
+		<td><h1>Menus</h1></td>
+		<td><h1>Categories</h1></td>
+		<td><h1>Sub Categories</h1></td>
+	</tr>
+	<tr>
+		<td id="menus" style="vertical-align:top" ></td>
+		<td id="categories" style="vertical-align:top" ></td>
+		<td id="subcategories" style="vertical-align:top" ></td>
+	</tr>
+</table>
+
+</body>
+</html>
+
+<script type="text/javascript">
+function populateMenus() {
+	var html = "";
+	var menuArr = CATEGORY.menuItems();
+	for(var x in menuArr) {
+		html += "<a href='#' onclick=\"populateCategories('"+menuArr[x]+"')\" >"+menuArr[x]+"</a> <br>";
+	}
+	document.getElementById("menus").innerHTML = html;
+	
+}
+
+function populateCategories(menu) {
+	var html = "";
+	var catArr = CATEGORY.categoryItems(menu);
+	for(var x in catArr) {
+		html += "<a href='#' onclick=\"populateSubCategories('"+menu+"', '"+catArr[x]+"')\" >"+catArr[x]+"</a> <br> ";
+	}
+	document.getElementById("categories").innerHTML = html;
+	document.getElementById("subcategories").innerHTML = "";
+}
+
+function populateSubCategories(menu, category) {
+	var html = "";
+	var subCatArr = CATEGORY.subCategoryItems(menu, category);
+	for(var x in subCatArr) {
+		html += "<a href='#' >"+subCatArr[x]+"</a> <br> ";
+	}
+	document.getElementById("subcategories").innerHTML = html;
+}
+populateMenus();
+</script>
